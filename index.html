@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saikel Word Chat | Universal Harmony</title>
+    
+    <!-- Liens pour l'installation Mobile -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#020406">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00f2fe; --gold: #f1c40f; --peace-green: #27ae60;
+            --deep-space: #020406; --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--deep-space); color: white; height: 100vh; overflow: hidden; }
+        .universe-bg { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 50% -20%, #1a1a2e 0%, var(--deep-space) 80%); }
+        #dynamic-moon { position: absolute; top: 40px; right: 60px; width: 80px; height: 80px; border-radius: 50%; box-shadow: -15px 10px 0 0 var(--gold); filter: blur(1px) drop-shadow(0 0 20px rgba(241, 196, 15, 0.3)); transition: 2s ease-in-out; }
+        .harmony-icons { position: absolute; top: 40px; left: 120px; display: flex; gap: 30px; align-items: center; }
+        .icon-sacred { font-size: 1.5rem; opacity: 0.6; transition: 0.5s; cursor: pointer; }
+        .icon-sacred:hover { opacity: 1; transform: scale(1.2); text-shadow: 0 0 15px white; }
+        .saikel-v10 { display: grid; grid-template-columns: 80px 1fr 320px; height: 100vh; }
+        .sidebar { background: rgba(0,0,0,0.8); border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 30px 0; gap: 40px; }
+        .main-core { display: flex; flex-direction: column; position: relative; }
+        .guardian-alert-bar { background: linear-gradient(90deg, var(--peace-green), transparent); padding: 10px 40px; font-size: 0.75rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; color: var(--peace-green); }
+        .chat-stream { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+        .bubble-v10 { max-width: 600px; padding: 25px; border-radius: 30px; background: var(--glass); border: 1px solid var(--border); backdrop-filter: blur(20px); position: relative; animation: slideIn 0.5s ease-out; }
+        .input-v10 { padding: 40px; display: flex; justify-content: center; }
+        .input-box { width: 80%; background: var(--glass); border: 1px solid var(--border); border-radius: 50px; padding: 15px 30px; display: flex; align-items: center; gap: 20px; }
+        .input-box input { flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 1rem; }
+        .right-intel { padding: 30px; border-left: 1px solid var(--border); background: rgba(0,0,0,0.4); }
+        .card-spirit { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 25px; text-align: center; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .deleted { animation: deleteMsg 0.4s forwards; }
+        @keyframes deleteMsg { to { transform: scale(0); opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="universe-bg"></div>
+    <div class="harmony-icons">
+        <i class="fas fa-star icon-sacred" style="color:#fff;"></i>
+        <i class="fas fa-om icon-sacred" style="color:#f093fb;"></i>
+        <i class="fas fa-cow icon-sacred" style="color:var(--gold);"></i>
+    </div>
+    <div id="dynamic-moon"></div>
+
+    <div class="saikel-v10">
+        <nav class="sidebar">
+            <div style="font-weight:900; color:var(--primary); font-size:1.5rem;">S</div>
+            <div style="color:var(--primary)"><i class="fas fa-comment-dots fa-lg"></i></div>
+            <div style="color:#333"><i class="fas fa-globe fa-lg"></i></div>
+            <div style="color:#333"><i class="fas fa-shield-heart fa-lg"></i></div>
+            <div style="margin-top:auto; color:var(--gold);"><i class="fas fa-infinity fa-lg"></i></div>
+        </nav>
+
+        <main class="main-core">
+            <div class="guardian-alert-bar"><i class="fas fa-user-shield"></i><span>GUARDIAN IA : Protection Universelle active.</span></div>
+            <div class="chat-stream" id="chat-flow">
+                <div class="bubble-v10"><h4 style="color:var(--gold); margin-bottom:10px;">Saikel Word Chat</h4>Bienvenue dans l'ère de l'Harmonie.</div>
+            </div>
+            <div class="input-v10">
+                <div class="input-box">
+                    <i class="fas fa-peace" style="color:var(--peace-green)"></i>
+                    <input type="text" id="v-input" placeholder="Partagez avec respect...">
+                    <button onclick="handleGuardian()" style="background:var(--primary); border:none; padding:10px 20px; border-radius:20px; font-weight:800; cursor:pointer;">ENVOYER</button>
+                </div>
+            </div>
+        </main>
+
+        <aside class="right-intel">
+            <div class="card-spirit"><i class="fas fa-hands-helping" style="font-size:2rem; color:var(--peace-green);"></i><h4>SAIKEL GUARDIAN</h4><p>Paix et respect garantis.</p></div>
+            <div class="card-spirit"><h4 style="color:var(--gold);">JOUR DU CYCLE</h4><p id="cycle-day" style="font-size:1.5rem; font-weight:800;">Jour 1</p></div>
+        </aside>
+    </div>
+
+    <script>
+        // Enregistrement du Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Saikel prêt !'))
+                    .catch(err => console.log('Erreur SW'));
+            });
+        }
+
+        let day = 1;
+        function updateMoon() {
+            const moon = document.getElementById('dynamic-moon');
+            if (day <= 7) { moon.style.boxShadow = "-15px 10px 0 0 var(--gold)"; moon.style.backgroundColor = "transparent"; }
+            else if (day > 13 && day < 17) { moon.style.boxShadow = "0 0 40px var(--gold)"; moon.style.backgroundColor = "var(--gold)"; }
+            else { moon.style.boxShadow = "15px 10px 0 0 var(--gold)"; moon.style.backgroundColor = "transparent"; }
+            document.getElementById('cycle-day').innerText = "Jour " + day;
+            day = (day % 30) + 1;
+        }
+        setInterval(updateMoon, 5000);
+
+        function handleGuardian() {
+            const input = document.getElementById('v-input');
+            const flow = document.getElementById('chat-flow');
+            if(input.value.trim() === "") return;
+            const msg = document.createElement('div');
+            msg.className = 'bubble-v10';
+            msg.style.alignSelf = 'flex-end';
+            msg.innerText = input.value;
+            flow.appendChild(msg);
+            input.value = "";
+            flow.scrollTop = flow.scrollHeight;
+        }
+    </script>
+</body>
+</html>
